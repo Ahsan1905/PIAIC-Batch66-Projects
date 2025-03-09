@@ -1,0 +1,46 @@
+import random
+
+# Biryani choices with icons
+biryani_choices = {
+    "chicken biryani": "🍗🍛", 
+    "mutton biryani": "🥩🍛", 
+    "potato biryani": "🥔🍛"
+}
+
+def get_computer_choice():
+    return random.choice(list(biryani_choices.keys()))
+
+def get_winner(player, computer):
+    if player == computer:
+        return "It's a tie! 🤝"
+    elif (player == "chicken biryani" and computer == "potato biryani") or \
+         (player == "mutton biryani" and computer == "chicken biryani") or \
+         (player == "potato biryani" and computer == "mutton biryani"):
+        return "You win! 🎉🍽️"
+    else:
+        return "Computer wins! 🤖🔥"
+
+def play_game():
+    print("🔥 Welcome to Biryani Battle! 🍛")
+    choices = list(biryani_choices.keys())
+    
+    while True:
+        print("\nOptions: 🐔 Chicken Biryani, 🐑 Mutton Biryani, 🥔 Potato Biryani")
+        player_choice = input("Choose your biryani: ").lower()
+        
+        if player_choice not in choices:
+            print("❌ Invalid choice, try again!")
+            continue
+        
+        computer_choice = get_computer_choice()
+        print(f"Computer chose: {biryani_choices[computer_choice]} ({computer_choice})")
+        
+        result = get_winner(player_choice, computer_choice)
+        print(result)
+        
+        play_again = input("Play again? (yes/no): ").lower()
+        if play_again != "yes":
+            print("Thanks for playing! 🍽️🔥")
+            break
+
+play_game()
